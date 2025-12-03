@@ -1,6 +1,0 @@
-User-agent: *
-Disallow: /drafts/
-Disallow: /private/
-
-Sitemap: https://blog.yinxianwei.com/sitemap.xml
-Host: https://yinxianwei.com
