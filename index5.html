@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>一枝红杏出墙来</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+
+                    <section id="content" class="body">
+                        <ol id="posts-list" class="hfeed" start="9">
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/an-zhuo-position-absolute-position-fixedhe-jian-pan-chong-tu-de-wen-ti.html" rel="bookmark"
+                               title="Permalink to 安卓 position: absolute; position: fixed;和键盘冲突的问题">安卓 position: absolute; position: fixed;和键盘冲突的问题</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-12-27T16:29:40+08:00">
+                Published: Thu 27 December 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <h3>解决方式一</h3>
+<p>修改为relative或static</p>
+<h3>解决方式二</h3>
+<p>设置absolute时固定父元素高度（px）</p>
+<h3>解决方式三</h3>
+<p>弹出键盘时隐藏内容</p>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">max-height</span><span class="o">:</span><span class="w"> </span><span class="nt">500px</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">class</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+                        <a class="readmore" href="/an-zhuo-position-absolute-position-fixedhe-jian-pan-chong-tu-de-wen-ti.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/nginx-pei-zhi-https.html" rel="bookmark"
+                               title="Permalink to nginx 配置https">nginx 配置https</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-01T11:00:28+08:00">
+                Published: Thu 01 November 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p><code>update: 2018-08-20</code></p>
+<p>已支持泛域名申请：<a href="https://certbot.eff.org/">https://certbot.eff.org/</a></p>
+<blockquote>
+<p>Trying to get a wildcard certificate? Please use the dropdown menus below to get instructions specific to your system, and read those instructions carefully.</p>
+</blockquote>
+<hr>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>software-properties-common
+$<span class="w"> </span>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:certbot/certbot …</code></pre></div>
+                        <a class="readmore" href="/nginx-pei-zhi-https.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/git-commit-msg.html" rel="bookmark"
+                               title="Permalink to Git Commit Msg">Git Commit Msg</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-09-06T18:10:51+08:00">
+                Published: Thu 06 September 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="k">type</span><span class="p">&gt;(&lt;</span><span class="nx">scope</span><span class="p">&gt;):</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">subject</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nx">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nx">footer</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Example</p>
+<div class="highlight"><pre><span></span><code>fix(middleware): ensure Range headers adhere more closely to RFC 2616
+
+Add one new dependency, use `range-parser` (Express dependency) to compute
+range. It is more well-tested in the wild.
+
+Fixes #2310
+</code></pre></div>
+
+<!-- more -->
+
+<p>Allowed <type> values:</p>
+<ul>
+<li>feat 针对用户来时的新功能 …</li></ul>
+                        <a class="readmore" href="/git-commit-msg.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/yarn-puppeteercuo-wu.html" rel="bookmark"
+                               title="Permalink to yarn puppeteer错误">yarn puppeteer错误</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-09-05T18:50:32+08:00">
+                Published: Wed 05 September 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>error /app/node_modules/puppeteer: Command failed.
+Exit code: 1
+Command: node install.js
+Arguments:
+Directory: /app/node_modules/puppeteer
+Output:
+ERROR: Failed to download Chromium r579032! Set "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" env variable to skip download.
+{ Error: connect ETIMEDOUT 216.58.221.240:443
+    at Object._errnoException (util.js:992:11)
+    at _exceptionWithHostPort (util …</p>
+                        <a class="readmore" href="/yarn-puppeteercuo-wu.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/npm-version.html" rel="bookmark"
+                               title="Permalink to npm version">npm version</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-08-30T13:49:18+08:00">
+                Published: Thu 30 August 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <div class="highlight"><pre><span></span><code>版本示例：1.2.3 MAJOR.MINOR.PATCH:
+
+1.2.3
+┬ ┬ ┬
+│ │ │
+│ │ └ 补丁版本：bug修复，向后兼容
+│ └── 次要版本：新增功能，向后兼容
+└──── 主要版本：修改不向后兼容的api
+</code></pre></div>
+
+<!-- more -->
+
+<h5>示例</h5>
+<div class="highlight"><pre><span></span><code>  1 …</code></pre></div>
+                        <a class="readmore" href="/npm-version.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/commonjshe-amdcmd.html" rel="bookmark"
+                               title="Permalink to CommonJS和AMD/CMD">CommonJS和AMD/CMD</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-08-29T17:06:25+08:00">
+                Published: Wed 29 August 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>CommonJS根据JS的表现制定规范：</p>
+<blockquote>
+<p>{模块引用(require)} {模块定义(exports)} {模块标识(module)}</p>
+</blockquote>
+<p>NodeJS遵循了CommonJS规范，写法如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// foo.js</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">// index.js</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./foo&#39;</span><span class="p">)</span>
+<span class="nx">foo</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+</code></pre></div>
+
+<!-- more -->
+
+<p>CommonJS主要为了JS在后端制 …</p>
+                        <a class="readmore" href="/commonjshe-amdcmd.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/jwtbearer.html" rel="bookmark"
+                               title="Permalink to JwtBearer">JwtBearer</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-08-21T09:53:49+08:00">
+                Published: Tue 21 August 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <h4><a href="https://jwt.io/">JWT</a> Token由以下三部分组成：</h4>
+<ul>
+<li>
+<p><a href="https://tools.ietf.org/html/rfc7519#section-5">HEADER:ALGORITHM &amp; TOKEN TYPE</a></p>
+<p><code>json
+ {
+  "alg": "HS256",
+  "typ": "JWT"
+}</code></p>
+</li>
+</ul>
+<!-- more -->
+
+<ul>
+<li>
+<p><a href="https://tools.ietf.org/html/rfc7519#section-4.1">PAYLOAD:DATA</a></p>
+<p><code>json
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022
+}</code></p>
+</li>
+<li>
+<p>VERIFY SIGNATURE</p>
+<p><code>json
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  your-256-bit-secret
+)</code></p>
+</li>
+</ul>
+                        <a class="readmore" href="/jwtbearer.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/cron-parser.html" rel="bookmark"
+                               title="Permalink to cron-parser">cron-parser</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-08-15T14:23:57+08:00">
+                Published: Wed 15 August 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>Github: <a href="https://github.com/harrisiirak/cron-parser">cron-parser</a></p>
+<div class="highlight"><pre><span></span><code><span class="o">*</span><span class="w">    </span><span class="o">*</span><span class="w">    </span><span class="o">*</span><span class="w">    </span><span class="o">*</span><span class="w">    </span><span class="o">*</span><span class="w">    </span><span class="o">*</span>
+<span class="err">┬</span><span class="w">    </span><span class="err">┬</span><span class="w">    </span><span class="err">┬</span><span class="w">    </span><span class="err">┬</span><span class="w">    </span><span class="err">┬</span><span class="w">    </span><span class="err">┬</span>
+<span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="o">|</span>
+<span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">└</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">week</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">Sun</span><span class="p">)</span>
+<span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">└─────</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span>
+<span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">└──────────</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span>
+<span class="err">│</span><span class="w">    </span><span class="err">│</span><span class="w">    </span><span class="err">└───────────────</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">23</span><span class="p">)</span>
+<span class="err">│</span><span class="w">    </span><span class="err">└────────────────────</span><span class="w"> </span><span class="n">minute</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">59</span><span class="p">)</span>
+<span class="err">└─────────────────────────</span><span class="w"> </span><span class="n">second</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="p">)</span>
+</code></pre></div>
+
+<ol>
+<li>每10秒执行: <code>*/10 * * * * *</code></li>
+<li>每周一10点执行: 0 0 10 ? * 1</li>
+<li>每月1号10点执行: 0 0 10 1 * ?</li>
+</ol>
+<p>暂时 …</p>
+                        <a class="readmore" href="/cron-parser.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/guan-yu-tong-guo-documentstylesheetsxiu-gai-yang-shi-gui-ze.html" rel="bookmark"
+                               title="Permalink to 关于通过document.styleSheets修改样式规则">关于通过document.styleSheets修改样式规则</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-07-19T15:49:25+08:00">
+                Published: Thu 19 July 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">changeTheme</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span>
+<span class="w">            </span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;ROLE_ID&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;__theme&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">colors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;background-color&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;border-color&#39;</span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">styleSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">styleSheets</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">href</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">styleSheets</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">styleSheets</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">styleSheet</span><span class="p">.</span><span class="nx">rules</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var …</span></code></pre></div>
+                        <a class="readmore" href="/guan-yu-tong-guo-documentstylesheetsxiu-gai-yang-shi-gui-ze.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/macxiu-gai-ping-mu-kuai-zhao-bao-cun-de-wei-zhi.html" rel="bookmark"
+                               title="Permalink to Mac修改屏幕快照保存的位置">Mac修改屏幕快照保存的位置</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-07-04T15:18:26+08:00">
+                Published: Wed 04 July 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <div class="highlight"><pre><span></span><code>$<span class="w"> </span>defaults<span class="w"> </span>write<span class="w"> </span>com.apple.screencapture<span class="w"> </span>location<span class="w"> </span>&lt;path&gt;
+$<span class="w"> </span>killall<span class="w"> </span>SystemUIServer
+</code></pre></div>
+                        <a class="readmore" href="/macxiu-gai-ping-mu-kuai-zhao-bao-cun-de-wei-zhi.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+                    </ol><!-- /#posts-list -->
+  <nav>
+    <ul>
+        <li><a href="/index.html">&Lang;</a></li>
+        <li><a href="/index4.html">&lang;</a></li>
+      <li>Page 5 / 6</li>
+        <li><a href="/index6.html">&rang;</a></li>
+        <li><a href="/index6.html">&Rang;</a></li>
+    </ul>
+  </nav>
+                    </section><!-- /#content -->
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

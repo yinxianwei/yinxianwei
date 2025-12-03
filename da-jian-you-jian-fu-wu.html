@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>搭建邮件服务</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="环境 Ubuntu 22.04 server 64bit nginx+php sqlite3 FQDN 怎样使修改的静态主机名永久生效？ # 更新 apt-get update echo > /etc/hostname mail.example.com # 注释 -..." />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/da-jian-you-jian-fu-wu.html" rel="bookmark"
+             title="Permalink to 搭建邮件服务">搭建邮件服务</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2023-04-20T11:17:00+08:00">
+                Published: Thu 20 April 2023
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+<p>tags: <a href="/tag/email.html">email</a> </p>        
+</footer><!-- /.post-info -->        <h1>环境</h1>
+<ol>
+<li>Ubuntu 22.04 server 64bit</li>
+<li>nginx+php</li>
+<li>sqlite3</li>
+</ol>
+<h1>FQDN</h1>
+<blockquote>
+<p><a href="https://support.huaweicloud.com/ecs_faq/zh-cn_topic_0050735736.html">怎样使修改的静态主机名永久生效？</a></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># 更新</span>
+apt-get<span class="w"> </span>update
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname<span class="w"> </span>mail.example.com
+
+<span class="c1"># 注释 - update_hostname</span>
+vim<span class="w"> </span>/etc/cloud/cloud.cfg
+
+<span class="c1"># 重启</span>
+reboot
+</code></pre></div>
+
+<h1>安装nginx</h1>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>nginx
+systemctl<span class="w"> </span>start<span class="w"> </span>nginx
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>nginx
+</code></pre></div>
+
+<h1>安装certbot</h1>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>certbot
+certbot<span class="w"> </span>certonly<span class="w"> </span>--manual<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;yinxianwei.com,*.yinxianwei.com&#39;</span>
+<span class="c1"># 1. 输入邮箱</span>
+<span class="c1"># 2. Y</span>
+<span class="c1"># 3. N</span>
+<span class="c1"># 4. *.example.com</span>
+<span class="c1"># 5. 配置域名解析，TXT _acme-challenge 提示字符串</span>
+<span class="c1"># 6. 配置后等待几分钟回车</span>
+</code></pre></div>
+
+<h1>设置证书自动更新</h1>
+<div class="highlight"><pre><span></span><code>crontab<span class="w"> </span>-e
+@daily<span class="w"> </span>certbot<span class="w"> </span>certonly<span class="w"> </span>--manual<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;yinxianwei.com,*.yinxianwei.com&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>postfix<span class="w"> </span>dovecot<span class="w"> </span>nginx
+</code></pre></div>
+
+<h1>查看日志</h1>
+<div class="highlight"><pre><span></span><code>less<span class="w"> </span>/var/log/letsencrypt/letsencrypt.log
+</code></pre></div>
+
+<h1>安装php</h1>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>php-imap<span class="w"> </span>php-mbstring<span class="w"> </span>php-fpm<span class="w"> </span>php-sqlite3
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>php8.1-fpm
+</code></pre></div>
+
+<h1>安装postfix</h1>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>postfix<span class="w"> </span>postfix-sqlite
+systemctl<span class="w"> </span>start<span class="w"> </span>postfix
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>postfix
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>/etc/postfix/master.cf
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># master.cf</span>
+submission<span class="w"> </span>inet<span class="w"> </span>n<span class="w">       </span>-<span class="w">       </span>y<span class="w">       </span>-<span class="w">       </span>-<span class="w">       </span>smtpd
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">syslog_name</span><span class="o">=</span>postfix/submission
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_tls_security_level</span><span class="o">=</span>encrypt
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_sasl_auth_enable</span><span class="o">=</span>yes
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_tls_auth_only</span><span class="o">=</span>yes
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_reject_unlisted_recipient</span><span class="o">=</span>no
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_client_restrictions</span><span class="o">=</span>permit_sasl_authenticated,reject
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_recipient_restrictions</span><span class="o">=</span>permit_sasl_authenticated,reject
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">milter_macro_daemon_name</span><span class="o">=</span>ORIGINATING
+smtps<span class="w">     </span>inet<span class="w">  </span>n<span class="w">       </span>-<span class="w">       </span>y<span class="w">       </span>-<span class="w">       </span>-<span class="w">       </span>smtpd
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">syslog_name</span><span class="o">=</span>postfix/smtps
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_tls_wrappermode</span><span class="o">=</span>yes
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_sasl_auth_enable</span><span class="o">=</span>yes
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">smtpd_client_restrictions</span><span class="o">=</span>permit_sasl_authenticated,reject
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">milter_macro_daemon_name</span><span class="o">=</span>ORIGINATING
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>/etc/postfix/main.cf
+
+<span class="c1"># TLS parameters</span>
+<span class="nv">smtpd_tls_cert_file</span><span class="o">=</span>/etc/letsencrypt/live/example.com/fullchain.pem
+<span class="nv">smtpd_tls_key_file</span><span class="o">=</span>/etc/letsencrypt/live/example.com/privkey.pem
+<span class="nv">smtpd_tls_security_level</span><span class="o">=</span>may
+<span class="nv">smtpd_tls_loglevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">smtpd_tls_session_cache_database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>btree:<span class="si">${</span><span class="nv">data_directory</span><span class="si">}</span>/smtpd_scache
+
+<span class="nv">smtp_tls_CApath</span><span class="o">=</span>/etc/ssl/certs
+<span class="nv">smtp_tls_security_level</span><span class="o">=</span>may
+<span class="nv">smtp_tls_loglevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">smtp_tls_session_cache_database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>btree:<span class="si">${</span><span class="nv">data_directory</span><span class="si">}</span>/smtp_scache
+
+<span class="c1">#Enforce TLSv1.3 or TLSv1.2</span>
+<span class="nv">smtpd_tls_mandatory_protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!SSLv2,<span class="w"> </span>!SSLv3,<span class="w"> </span>!TLSv1,<span class="w"> </span>!TLSv1.1
+<span class="nv">smtpd_tls_protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!SSLv2,<span class="w"> </span>!SSLv3,<span class="w"> </span>!TLSv1,<span class="w"> </span>!TLSv1.1
+<span class="nv">smtp_tls_mandatory_protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!SSLv2,<span class="w"> </span>!SSLv3,<span class="w"> </span>!TLSv1,<span class="w"> </span>!TLSv1.1
+<span class="nv">smtp_tls_protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!SSLv2,<span class="w"> </span>!SSLv3,<span class="w"> </span>!TLSv1,<span class="w"> </span>!TLSv1.1
+
+<span class="nv">mailbox_transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lmtp:unix:private/dovecot-lmtp
+<span class="nv">smtputf8_enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>no
+
+<span class="nv">smtpd_use_tls</span><span class="o">=</span>yes
+<span class="nv">smtpd_tls_auth_only</span><span class="o">=</span>yes
+<span class="nv">smtpd_sasl_type</span><span class="o">=</span>dovecot
+<span class="nv">smtpd_sasl_path</span><span class="o">=</span>private/auth
+<span class="nv">smtpd_sasl_auth_enable</span><span class="o">=</span>yes
+<span class="nv">smtpd_sasl_security_options</span><span class="o">=</span>noanonymous
+<span class="nv">smtpd_sender_restrictions</span><span class="o">=</span>permit_sasl_authenticated
+<span class="nv">smtpd_recipient_restrictions</span><span class="o">=</span>permit_mynetworks<span class="w"> </span>permit_sasl_authenticated<span class="w"> </span>permit_auth_destination<span class="w"> </span>reject_unauth_destination
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看端口</span>
+ss<span class="w"> </span>-lnpt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>master
+</code></pre></div>
+
+<h1>安装dovecot</h1>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>dovecot-core<span class="w"> </span>dovecot-imapd<span class="w"> </span>dovecot-lmtpd<span class="w"> </span>dovecot-sqlite
+systemctl<span class="w"> </span>start<span class="w"> </span>dovecot
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>dovecot
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>/etc/dovecot/dovecot.conf
+
+<span class="nv">protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>imap<span class="w"> </span>lmtp
+!include_try<span class="w"> </span>/usr/share/dovecot/protocols.d/*.protocol
+
+vim<span class="w"> </span>/etc/dovecot/conf.d/10-mail.conf
+
+<span class="nv">mail_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>maildir:~/Maildir
+<span class="nv">mail_home</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/var/vmail/mailbox/%d/%n/
+namespace<span class="w"> </span>inbox<span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">separator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/
+<span class="w">  </span><span class="nv">inbox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes
+<span class="o">}</span>
+
+vim<span class="w"> </span>/etc/dovecot/conf.d/10-master.conf
+
+service<span class="w"> </span>auth<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>unix_listener<span class="w"> </span>/var/spool/postfix/private/auth<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="nv">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0660</span>
+<span class="w">      </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>postfix
+<span class="w">      </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>postfix
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+
+service<span class="w"> </span>lmtp<span class="w"> </span><span class="o">{</span>
+<span class="w"> </span>unix_listener<span class="w"> </span>/var/spool/postfix/private/auth<span class="w"> </span><span class="o">{</span>
+<span class="w">   </span><span class="nv">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0600</span>
+<span class="w">   </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>postfix
+<span class="w">   </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>postfix
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+
+service<span class="w"> </span>stats<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>unix_listener<span class="w"> </span>stats-reader<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>www-data
+<span class="w">    </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>www-data
+<span class="w">    </span><span class="nv">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0660</span>
+<span class="o">}</span>
+
+unix_listener<span class="w"> </span>stats-writer<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>www-data
+<span class="w">    </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>www-data
+<span class="w">    </span><span class="nv">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0660</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+
+
+gpasswd<span class="w"> </span>-a<span class="w"> </span>www-data<span class="w"> </span>dovecot
+
+vim<span class="w"> </span>/etc/dovecot/conf.d/10-auth.conf
+
+
+<span class="nv">disable_plaintext_auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes
+<span class="nv">auth_username_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>%u
+<span class="nv">auth_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>plain<span class="w"> </span>login
+<span class="nv">auth_default_realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>example.com
+<span class="c1">#!include auth-system.conf.ext</span>
+!include<span class="w"> </span>auth-sql.conf.ext
+
+<span class="c1"># debug</span>
+<span class="nv">auth_debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes
+<span class="nv">auth_debug_passwords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes
+
+
+vim<span class="w"> </span>/etc/dovecot/dovecot-sql.conf.ext
+<span class="nv">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sqlite
+
+<span class="nv">connect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/var/vmail/db/postfixadmin.db
+
+<span class="nv">default_pass_scheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ARGON2I
+
+<span class="nv">password_query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>SELECT<span class="w"> </span>username<span class="w"> </span>AS<span class="w"> </span>user,password<span class="w"> </span>FROM<span class="w"> </span>mailbox<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;%u&#39;</span><span class="w"> </span>AND<span class="w"> </span><span class="nv">active</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
+
+<span class="nv">user_query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>SELECT<span class="w"> </span>maildir,<span class="w"> </span><span class="m">2000</span><span class="w"> </span>AS<span class="w"> </span>uid,<span class="w"> </span><span class="m">2000</span><span class="w"> </span>AS<span class="w"> </span>gid<span class="w"> </span>FROM<span class="w"> </span>mailbox<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;%u&#39;</span><span class="w"> </span>AND<span class="w"> </span><span class="nv">active</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
+
+<span class="nv">iterate_query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>SELECT<span class="w"> </span>username<span class="w"> </span>AS<span class="w"> </span>user<span class="w"> </span>FROM<span class="w"> </span>mailbox
+
+
+vim<span class="w"> </span>/etc/dovecot/conf.d/10-ssl.conf
+
+<span class="nv">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>required
+<span class="nv">ssl_cert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;/etc/letsencrypt/live/example.com/fullchain.pem
+<span class="nv">ssl_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;/etc/letsencrypt/live/example.com/privkey.pem
+<span class="nv">ssl_prefer_server_ciphers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes
+<span class="nv">ssl_min_protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>TLSv1.2
+
+
+vim<span class="w"> </span>/etc/ssl/openssl.cnf
+
+<span class="c1">#providers = provider_sect</span>
+
+vim<span class="w"> </span>/etc/dovecot/conf.d/15-mailboxes.conf
+
+mailbox<span class="w"> </span>Junk<span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">auto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>create
+<span class="w">  </span><span class="nv">special_use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="se">\J</span>unk
+<span class="o">}</span>
+mailbox<span class="w"> </span>Trash<span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">auto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>create
+<span class="w">  </span><span class="nv">special_use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="se">\T</span>rash
+<span class="o">}</span>
+mailbox<span class="w"> </span>Sent<span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">auto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>create
+<span class="w">  </span><span class="nv">special_use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="se">\S</span>ent
+<span class="o">}</span>
+</code></pre></div>
+
+<h1>添加用户</h1>
+<div class="highlight"><pre><span></span><code>adduser<span class="w"> </span>vmail<span class="w"> </span>--system<span class="w"> </span>--group<span class="w"> </span>--uid<span class="w"> </span><span class="m">2000</span><span class="w"> </span>--disabled-login<span class="w"> </span>--no-create-home
+mkdir<span class="w"> </span>/var/vmail/
+mkdir<span class="w"> </span>/var/vmail/mailbox
+mkdir<span class="w"> </span>/var/vmail/db/
+touch<span class="w"> </span>/var/vmail/db/postfixadmin.db
+chown<span class="w"> </span>vmail:vmail<span class="w"> </span>/var/vmail/<span class="w"> </span>-R
+</code></pre></div>
+
+<h1>安装postfixadmin</h1>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>acl
+
+<span class="nb">cd</span><span class="w"> </span>/srv/
+wget<span class="w"> </span>-O<span class="w"> </span>postfixadmin.tgz<span class="w"> </span>https://github.com/postfixadmin/postfixadmin/archive/postfixadmin-3.3.10.tar.gz
+tar<span class="w"> </span>-zxvf<span class="w"> </span>postfixadmin.tgz
+mv<span class="w"> </span>postfixadmin-postfixadmin-3.3.10<span class="w"> </span>postfixadmin
+ln<span class="w"> </span>-s<span class="w"> </span>/srv/postfixadmin<span class="w"> </span>/usr/share/nginx/postfixadmin
+
+mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/postfixadmin/templates_c
+setfacl<span class="w"> </span>-R<span class="w"> </span>-m<span class="w"> </span>u:www-data:rwx<span class="w"> </span>/srv/postfixadmin/templates_c/
+setfacl<span class="w"> </span>-R<span class="w"> </span>-m<span class="w"> </span>u:www-data:rx<span class="w"> </span>/etc/letsencrypt/live/<span class="w"> </span>/etc/letsencrypt/archive/
+setfacl<span class="w"> </span>-R<span class="w"> </span>-m<span class="w"> </span>u:www-data:rwx<span class="w"> </span>/var/run/dovecot/stats-reader<span class="w"> </span>/var/run/dovecot/stats-writer
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>/srv/postfixadmin/config.local.php
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;encrypt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;dovecot:ARGON2I&#39;</span><span class="p">;</span>
+<span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;dovecotpw&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/usr/bin/doveadm pw -r 5&quot;</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="o">@</span><span class="nb">file_exists</span><span class="p">(</span><span class="s1">&#39;/usr/bin/doveadm&#39;</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// @ to silence openbase_dir stuff; see https://github.com/postfixadmin/postfixadmin/issues/171</span>
+    <span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;dovecotpw&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/usr/bin/doveadm pw -r 5&quot;</span><span class="p">;</span> <span class="c1"># debian</span>
+<span class="p">}</span>
+<span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;configured&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;database_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite&#39;</span><span class="p">;</span>
+<span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;database_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/var/vmail/db/postfixadmin.db&#39;</span><span class="p">;</span>
+<span class="nv">$CONF</span><span class="p">[</span><span class="s1">&#39;default_language&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cn&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>/etc/nginx/conf.d/postfixadmin.conf
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">   </span><span class="n">listen</span><span class="w"> </span><span class="p">[::]:</span><span class="mi">80</span><span class="p">;</span>
+<span class="w">   </span><span class="n">server_name</span><span class="w"> </span><span class="n">postfixadmin</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+
+<span class="w">   </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">postfixadmin</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="p">;</span>
+<span class="w">   </span><span class="n">index</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
+
+<span class="w">   </span><span class="n">access_log</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">postfixadmin_access</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+<span class="w">   </span><span class="n">error_log</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">postfixadmin_error</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+
+<span class="w">   </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">try_files</span><span class="w"> </span><span class="o">$</span><span class="n">uri</span><span class="w"> </span><span class="o">$</span><span class="n">uri</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="n">location</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">^/</span><span class="p">(</span><span class="o">.+</span>\<span class="o">.</span><span class="n">php</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">try_files</span><span class="w"> </span><span class="o">$</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="mi">404</span><span class="p">;</span>
+<span class="w">        </span><span class="n">fastcgi_pass</span><span class="w"> </span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">php8</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">fpm</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+<span class="w">        </span><span class="n">fastcgi_index</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="p">;</span>
+<span class="w">        </span><span class="n">fastcgi_param</span><span class="w"> </span><span class="n">SCRIPT_FILENAME</span><span class="w"> </span><span class="o">$</span><span class="n">document_root</span><span class="o">$</span><span class="n">fastcgi_script_name</span><span class="p">;</span>
+<span class="w">        </span><span class="n">include</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">fastcgi_params</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nt">打开</span><span class="w"> </span><span class="nt">http</span><span class="o">://</span><span class="nt">postfixadmin</span><span class="p">.</span><span class="nc">example</span><span class="p">.</span><span class="nc">com</span><span class="o">/</span><span class="nt">setup</span><span class="p">.</span><span class="nc">php</span>
+<span class="nt">设置密码</span>
+<span class="nt">vim</span><span class="w"> </span><span class="o">/</span><span class="nt">srv</span><span class="o">/</span><span class="nt">postfixadmin</span><span class="o">/</span><span class="nt">config</span><span class="p">.</span><span class="nc">local</span><span class="p">.</span><span class="nc">php</span>
+<span class="o">$</span><span class="nt">CONF</span><span class="cp">[</span><span class="s1">&#39;setup_password&#39;</span><span class="cp">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxx&#39;</span><span class="o">;</span>
+<span class="nt">刷新页面</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>vim<span class="w"> </span>/etc/postfix/main.cf
+
+<span class="nv">virtual_mailbox_domains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sqlite:/etc/postfix/sql/sqlite_virtual_domains_maps.cf
+<span class="nv">virtual_mailbox_maps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sqlite:/etc/postfix/sql/sqlite_virtual_mailbox_maps.cf
+<span class="nv">virtual_alias_maps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sqlite:/etc/postfix/sql/sqlite_virtual_alias_maps.cf
+<span class="nv">virtual_transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lmtp:unix:private/dovecot-lmtp
+
+mkdir<span class="w"> </span>/etc/postfix/sql/
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;dbpath = /var/vmail/db/postfixadmin.db\nquery = SELECT domain FROM domain WHERE domain=&#39;%s&#39; AND active = &#39;1&#39;&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/postfix/sql/sqlite_virtual_domains_maps.cf
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;dbpath = /var/vmail/db/postfixadmin.db\nquery = SELECT maildir FROM mailbox WHERE username=&#39;%s&#39; AND active = &#39;1&#39;&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/postfix/sql/sqlite_virtual_mailbox_maps.cf
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;dbpath = /var/vmail/db/postfixadmin.db\nquery = SELECT goto FROM alias WHERE address=&#39;%s&#39; AND active = &#39;1&#39;&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/postfix/sql/sqlite_virtual_alias_maps.cf
+
+chmod<span class="w"> </span><span class="m">0640</span><span class="w"> </span>/etc/postfix/sql/*
+setfacl<span class="w"> </span>-R<span class="w"> </span>-m<span class="w"> </span>u:postfix:rx<span class="w"> </span>/etc/postfix/sql/
+
+postconf<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;mydestination = \$myhostname, localhost.\$mydomain, localhost&quot;</span>
+
+vim<span class="w"> </span>/etc/postfix/main.cf
+
+<span class="nv">virtual_mailbox_base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/var/vmail
+<span class="nv">virtual_minimum_uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span>
+<span class="nv">virtual_uid_maps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>static:2000
+<span class="nv">virtual_gid_maps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>static:2000
+
+systemctl<span class="w"> </span>restart<span class="w"> </span>postfix<span class="w"> </span>dovecot
+</code></pre></div>
+
+<h1>安装webmail</h1>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>php-xml<span class="w"> </span>php-curl
+
+mkdir<span class="w"> </span>/var/www/rainloop
+wget<span class="w"> </span>https://www.rainloop.net/repository/webmail/rainloop-latest.zip
+unzip<span class="w"> </span>rainloop-latest.zip<span class="w"> </span>-d<span class="w"> </span>/var/www/rainloop
+
+
+<span class="nb">cd</span><span class="w"> </span>/var/www/rainloop
+find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-exec<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>.
+
+
+vim<span class="w"> </span>/etc/nginx/conf.d/webmail.conf
+
+server<span class="w"> </span><span class="o">{</span>
+<span class="w">   </span>listen<span class="w"> </span><span class="m">80</span><span class="p">;</span>
+<span class="w">   </span>listen<span class="w"> </span><span class="o">[</span>::<span class="o">]</span>:80<span class="p">;</span>
+<span class="w">   </span>server_name<span class="w"> </span>webmail.example.com<span class="p">;</span>
+
+<span class="w">   </span>root<span class="w"> </span>/var/www/rainloop<span class="p">;</span>
+<span class="w">   </span>index<span class="w"> </span>index.php<span class="w"> </span>index.html<span class="p">;</span>
+
+<span class="w">   </span>access_log<span class="w"> </span>/var/log/nginx/webmail_access.log<span class="p">;</span>
+<span class="w">   </span>error_log<span class="w"> </span>/var/log/nginx/webmail_error.log<span class="p">;</span>
+
+<span class="w">   </span>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span>
+<span class="w">       </span>try_files<span class="w"> </span><span class="nv">$uri</span><span class="w"> </span><span class="nv">$uri</span>/<span class="w"> </span>/index.php<span class="p">;</span>
+<span class="w">   </span><span class="o">}</span>
+
+<span class="w">   </span>location<span class="w"> </span>^~<span class="w"> </span>/data<span class="w"> </span><span class="o">{</span>
+<span class="w">       </span>deny<span class="w"> </span>all<span class="p">;</span>
+<span class="w">   </span><span class="o">}</span>
+
+<span class="w">   </span>location<span class="w"> </span>~<span class="w"> </span>^/<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)</span>$<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>try_files<span class="w"> </span><span class="nv">$uri</span><span class="w"> </span><span class="o">=</span><span class="m">404</span><span class="p">;</span>
+<span class="w">        </span>fastcgi_pass<span class="w"> </span>unix:/run/php/php8.1-fpm.sock<span class="p">;</span>
+<span class="w">        </span>fastcgi_index<span class="w"> </span>index.php<span class="p">;</span>
+<span class="w">        </span>fastcgi_param<span class="w"> </span>SCRIPT_FILENAME<span class="w"> </span><span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+<span class="w">        </span>include<span class="w"> </span>/etc/nginx/fastcgi_params<span class="p">;</span>
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+
+打开：<span class="w"> </span>http://webmail.example.com/index.php?admin
+
+admin
+<span class="m">12345</span>
+
+域名<span class="w"> </span>-<span class="w"> </span>添加域名
+
+名字:<span class="w"> </span>*.example.com
+IMAP:<span class="w"> </span>mail.example.com,<span class="w"> </span>SSL/TLS
+SMTP:<span class="w"> </span>mail.example.com,<span class="w"> </span>SSL/TLS
+勾选<span class="w"> </span>使用短用户名登录
+
+域名<span class="w"> </span>-<span class="w"> </span>添加别名
+
+example.com<span class="w"> </span>-&gt;<span class="w"> </span>*.example.com
+</code></pre></div>
+
+<p>https://support.huaweicloud.com/ecs_faq/zh-cn_topic_0050735736.html</p>
+<p>https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-on-ubuntu-22-04</p>
+<p>https://imaginefei.com/2022/09/03/IT%E6%8A%80%E6%9C%AF/%E8%BF%90%E7%BB%B4/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E4%B9%8BPostfix-Dovecot-Postfixadmin/</p>
+<p>https://developer.aliyun.com/article/417606</p>
+<p>https://www.linuxbabe.com/redhat/postfixadmin-create-virtual-mailboxes-centos-mail-server</p>
+<p>https://www.linuxbabe.com/redhat/run-your-own-email-server-centos-postfix-smtp-server</p>
+<p>https://github.com/postfixadmin/postfixadmin/issues/567</p>
+<p>https://www.linuxbabe.com/mail-server/postfixadmin-ubuntu</p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>
