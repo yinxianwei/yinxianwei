@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>关于通过document.styleSheets修改样式规则</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="var innerText = ''; function changeTheme() { try { var colors = JSON.parse( window.localStorage.getItem(window.localStorage.getItem('ROLE_ID') +..." />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/guan-yu-tong-guo-documentstylesheetsxiu-gai-yang-shi-gui-ze.html" rel="bookmark"
+             title="Permalink to 关于通过document.styleSheets修改样式规则">关于通过document.styleSheets修改样式规则</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-07-19T15:49:25+08:00">
+                Published: 四 19 七月 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">innerText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">changeTheme</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span>
+<span class="w">            </span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;ROLE_ID&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;__theme&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">colors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;background-color&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;border-color&#39;</span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">styleSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">styleSheets</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">href</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">styleSheets</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">styleSheets</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">styleSheet</span><span class="p">.</span><span class="nx">rules</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">styleSheet</span><span class="p">.</span><span class="nx">rules</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">rule</span><span class="p">.</span><span class="nx">style</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">colors</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">keys</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">styleKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="kd">var</span><span class="w"> </span><span class="nx">sc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rule</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">getPropertyValue</span><span class="p">(</span><span class="nx">styleKey</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">colors</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">rule</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="nx">styleKey</span><span class="p">,</span><span class="w"> </span><span class="nx">sc</span><span class="p">,</span><span class="w"> </span><span class="nx">rule</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">getPropertyPriority</span><span class="p">(</span><span class="nx">styleKey</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">});</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">changeTheme</span><span class="p">();</span>
+</code></pre></div>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

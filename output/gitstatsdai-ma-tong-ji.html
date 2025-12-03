@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>gitstats代码统计</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="brew install gnuplot git clone https://github.com/hoxu/gitstats.git python gitstats/gitstats "git路径" "git路径" "生成路径" 如: python gitstats/gitstats -c..." />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/gitstatsdai-ma-tong-ji.html" rel="bookmark"
+             title="Permalink to gitstats代码统计">gitstats代码统计</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-01-09T13:18:41+08:00">
+                Published: 三 09 一月 2019
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <div class="highlight"><pre><span></span><code>brew install gnuplot
+
+git clone https://github.com/hoxu/gitstats.git
+
+python gitstats/gitstats &quot;git路径&quot; &quot;git路径&quot; &quot;生成路径&quot;
+
+如: python gitstats/gitstats -c project_name=&quot;name&quot; -c start_date=2017-10-1 &quot;git/code1&quot; &quot;git/code2&quot; out
+
+统计git/code1，git/code2代码，时间从2017-10-1号开始，项目名为name，输出至out目录
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">// 一些参数：</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="err">&#39;max_domai</span><span class="kc">ns</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;max_ex</span><span class="kc">t</span><span class="err">_le</span><span class="kc">n</span><span class="err">g</span><span class="kc">t</span><span class="err">h&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;s</span><span class="kc">t</span><span class="err">yle&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;gi</span><span class="kc">tstats</span><span class="err">.css&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;max_au</span><span class="kc">t</span><span class="err">hors&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;au</span><span class="kc">t</span><span class="err">hors_</span><span class="kc">t</span><span class="err">op&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;commi</span><span class="kc">t</span><span class="err">_begi</span><span class="kc">n</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;commi</span><span class="kc">t</span><span class="err">_e</span><span class="kc">n</span><span class="err">d&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;HEAD&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;li</span><span class="kc">near</span><span class="err">_li</span><span class="kc">nestats</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;projec</span><span class="kc">t</span><span class="err">_</span><span class="kc">na</span><span class="err">me&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;processes&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="err">&#39;s</span><span class="kc">tart</span><span class="err">_da</span><span class="kc">te</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;注意格式&#39;</span>
+<span class="p">}</span>
+</code></pre></div>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

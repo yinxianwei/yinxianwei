@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>redmine关联gitlab</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="1. 安装redmine_gitlab_hook 下载：https://github.com/phlegx/redmine_gitlab_hook/releases 解压后文件夹名字修改为redmine_gitlab_hook 放到redmine安装目录的plugins文件夹下..." />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/redmineguan-lian-gitlab.html" rel="bookmark"
+             title="Permalink to redmine关联gitlab">redmine关联gitlab</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-03-02T14:23:22+08:00">
+                Published: 三 02 三月 2022
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <h4>1. 安装redmine_gitlab_hook</h4>
+<ol>
+<li>下载：https://github.com/phlegx/redmine_gitlab_hook/releases</li>
+<li>解压后文件夹名字修改为redmine_gitlab_hook</li>
+<li>放到redmine安装目录的plugins文件夹下</li>
+<li>重启redmine</li>
+</ol>
+<h4>2. 插件设置</h4>
+<ol>
+<li>打开redmine的管理 - 配置 - 版本库</li>
+<li>选择SCM - git</li>
+<li>勾选自动获取程序变更、启用用于版本库管理的Web Service</li>
+<li>点击生成一个key</li>
+<li>修改用于引用问题的关键字添加*号（用于捕获所有提交内容）：<code>refs,references,IssueID,*</code></li>
+<li>跟踪标签可以设置关键字对应的状态和进度</li>
+<li>提交记录格式说明 https://www.redmine.org/projects/redmine/wiki/RedmineSettings#Referencing-issues-in-commit-messages</li>
+</ol>
+<!-- more -->
+
+<h4>3. 项目设置</h4>
+<ol>
+<li><code>git clone --mirror git@xxx/xxx.git</code> 到redmine服务器文件夹</li>
+<li>打开redmine项目配置 - 版本库 - 新建版本库</li>
+<li>勾选主板本库，库路径为git clone文件夹</li>
+<li>git项目settings/integrations添加webhook，url： <code>{redmine地址}/gitlab_hook?key={生成的key}&amp;project_id={redmine项目标识}&amp;repository_name={redmine版本库标识}</code></li>
+</ol>
+<p><img alt="A39F9E7A-5579-428A-AE77-DBBE25254248" src="media/15694821773552/A39F9E7A-5579-428A-AE77-DBBE25254248.png">
+<img alt="18410372-C3B7-45C5-BD28-BD1589F90942" src="media/15694821773552/18410372-C3B7-45C5-BD28-BD1589F90942.png">
+<img alt="16461869740591" src="media/15694821773552/16461869740591.jpg"></p>
+<p><img alt="9E203D59-BF32-424E-8CE6-694E11566F3" src="media/15694821773552/9E203D59-BF32-424E-8CE6-694E11566F3C.png">
+<img alt="EFDF8A76-42FF-4C5F-8C42-D158EE40E355" src="media/15694821773552/EFDF8A76-42FF-4C5F-8C42-D158EE40E355.png">
+<img alt="A76F1B8D-6B91-4ED9-88B8-978C0F88B1A7" src="media/15694821773552/A76F1B8D-6B91-4ED9-88B8-978C0F88B1A7.png"></p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

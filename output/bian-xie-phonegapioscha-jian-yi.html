@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>编写PhoneGapiOS插件一</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="PhoneGap安装 当前版本是PhoneGap2.9.1、Xcode6.3 下载PhoneGap 官网地址，NodeJS命令安装老是失败，我是直接下载的zip包解压的。 解压 解压之后的目录是这样的： iOS的工程创建 创建工程（终端命令） 首 …" />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/bian-xie-phonegapioscha-jian-yi.html" rel="bookmark"
+             title="Permalink to 编写PhoneGapiOS插件一">编写PhoneGapiOS插件一</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-04T14:27:55+08:00">
+                Published: 三 04 九月 2019
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <h1>PhoneGap安装</h1>
+<p>当前版本是<code>PhoneGap2.9.1</code>、<code>Xcode6.3</code></p>
+<ol>
+<li>
+<p>下载PhoneGap</p>
+<p><a href="https://phonegap.com/install/">官网地址</a>，NodeJS命令安装老是失败，我是直接下载的zip包解压的。
+<img alt="QQ20150421-2@2x" src="media/15027829717905/QQ20150421-2@2x.png"></p>
+</li>
+</ol>
+<!-- more -->
+
+<ol>
+<li>
+<p>解压</p>
+<p>解压之后的目录是这样的：
+<img alt="QQ20150421-3@2x" src="media/15027829717905/QQ20150421-3@2x.png"></p>
+</li>
+</ol>
+<!--more-->
+<h1>iOS的工程创建</h1>
+<ol>
+<li>
+<p>创建工程（终端命令）</p>
+<ul>
+<li>首先先建一个文件夹</li>
+<li>然后<code>cd /Users/admin/Downloads/phonegap-2.9.1/lib/ios/bin</code></li>
+<li>创建<code>./create /Users/admin/Desktop/PlguinDemo com.xxxx.plguin PlguinDemo</code></li>
+</ul>
+</li>
+<li>
+<p>说明</p>
+<ul>
+<li><code>/Users/admin/Desktop/PlguinDemo</code>为第一步创建的文件夹目录</li>
+<li><code>com.xxxx.plguin</code>为项目的<code>Bundle identifier</code></li>
+<li><code>PlguinDemo</code>为项目的包名</li>
+</ul>
+</li>
+<li>
+<p>创建成功</p>
+<p>成功之后在先建的文件夹下是这样的：
+<img alt="QQ20150420-2@2x" src="media/15027829717905/QQ20150420-2@2x.png"></p>
+</li>
+<li>
+<p>预览</p>
+<p>可以直接在终端里运行模拟器进行预览，终端命令如下：
+- <code>cd /Users/admin/Desktop/PlguinDemo/cordova</code>
+- 编译：<code>./build</code>，成功后可看到：** BUILD SUCCEEDED **
+- 模拟器运行：<code>./emulate</code>
+- 运行界面如下：</p>
+<p><img alt="QQ20150421-4@2x" src="media/15027829717905/QQ20150421-4@2x.png"></p>
+</li>
+</ol>
+<p>参考链接：<a href="https://bbs.phonegapcn.com/thread-9135-1-1.html">PhoneGap教程：使用PhoneGap命令行工具快速创建IOS</a></p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

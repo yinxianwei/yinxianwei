@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>All about angularjs $formatters and $parsers</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="The original link Hi folks, As a front end developers we need to deal with different data models which come from the server side. We have to..." />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/all-about-angularjs-formatters-and-parsers.html" rel="bookmark"
+             title="Permalink to All about angularjs $formatters and $parsers">All about angularjs $formatters and $parsers</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-04-24T15:29:13+08:00">
+                Published: 二 24 四月 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <p><a href="https://www.linkedin.com/pulse/all-angularjs-formatters-parsers-anuradha-bandara?trk=pulse-wechat-qr">The original link</a></p>
+<p>Hi folks, As a front end developers we need to deal with different data models which come from the server side. We have to format them , change them and yes! we need to validate them. Mainly JSON at these days. In most cases back end data not in the way it should be.(Back end developers doesn't bother to format data that much).Hence we are in a dark when we are going to render that data in our view. If you are angularjs user, Hell! you are in the business. Fortunately angularjs developers thought about it and provide few powerful features to us. <strong>Formatters</strong>, <strong>Parsers</strong> , <strong>validators</strong> and <strong>asyncValidators</strong>.</p>
+<!-- more -->
+
+<p>Before going further , These four features we can access via “link” function within the directive. And another point is we need “<strong>ngModelController</strong>” instance for the access these features. $parsers and $formatters are arrays, that act as pipelines that get called when users update the view(View to model update) or app update the view(<em>Model to view update</em>).</p>
+<p>So lets get to the business.A simple directive will explain everything. Lets start with the basic syntax of the $parsers and $formatters.</p>
+<p>We can use “ModelController.$formatters.unshift()” or “ModelController.$formatters.push()” to bind our $formatter or $parser functions to our model controller.Here I used the second option.</p>
+<p><img alt="angular-d-1" src="media/15027832317589/angular-d-1.png"></p>
+<p>So in here <strong>scope</strong> is the scope that is bound to our HTML template, <strong>element</strong> is the actual HTML DOM element, <strong>attr</strong> are the attributes of the directive HTML, and  <strong>ngModelController</strong>  is an instance of the required NgModelController.</p>
+<p>Wait! I know you wonder what is this “require: 'ngModel'” statement do. Do not panic guys. This statement connects our ngModelController instance with the real ng-model directive.</p>
+<p>The Important thing is this $parsers are called as soon as the value in the form input is modified by the user. In other words View to model update.In most of the cases $parsers used to handle custom validations. As an example, lets check this sample $parser function.</p>
+<p><img alt="angular-d-2" src="media/15027832317589/angular-d-2.png"></p>
+<p>Lets see actually what happens in here.</p>
+<p><img alt="angular-d-3" src="media/15027832317589/angular-d-3.png"></p>
+<p>As you can see , This simple parser function sets the validation attribute of our input. Pretty simple! That's about $parsers folks. Then we talk about $formatters.</p>
+<p>$formatters do the opposite of $parsers.They deal with data coming up from the model into view and they will call whenever the model is changed.</p>
+<p><img alt="angular-d-4" src="media/15027832317589/angular-d-4.png"></p>
+<p>Here is the super simple sample. This formatter convert input string into Uppercase.</p>
+<p><img alt="angular-d-5" src="media/15027832317589/angular-d-5.png"></p>
+<p>Now its time to get these things together.This is the full cycle.</p>
+<p><img alt="angular-d-6" src="media/15027832317589/angular-d-6.png"></p>
+<p>Now we know about parsers and formatters.But the story still continues.Angular 1.3 introduced new feature call validator.What the heck.we use parsers to validate.Why this new validator?Let me explain,</p>
+<p>Validators are created by combining both parsers and formatters.Is this make sense to you?Yes that means, validators can access both view value and model value.Ok here is the same example of, we use earlier with $parsers.</p>
+<p><img alt="angular-d-7" src="media/15027832317589/angular-d-7.png"></p>
+<p>Thing is we don't want to set validity in here. It will happen internally.</p>
+<p>So far so good!Here is the final phase. What happens if you want to validate something based on server response. As an example you want to validate user name in your login. For these purposes we can use <strong>$asyncValidators.Basically</strong> these validators are based on promises. Lets go for the code. Sorry folks , I don't have any backend to demonstrate this. But here is the code. Go and try it yourself.</p>
+<p><img alt="angular-d-8" src="media/15027832317589/angular-d-8.png"></p>
+<p>To see working example , go and pick jsfiddle that I created <a href="http://jsfiddle.net/bandara00007/8xmLa22n/16/">here</a>.</p>
+<p>Cheers!Happy $parsers and $formatters!</p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

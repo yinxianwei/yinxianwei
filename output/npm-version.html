@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>npm version</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="版本示例：1.2.3 MAJOR.MINOR.PATCH: 1.2.3 ┬ ┬ ┬ │ │ │ │ │ └ 补丁版本：bug修复，向后兼容 │ └── 次要版本：新增功能，向后兼容 └──── 主要版本：修改不向后兼容的api 示例 1 …" />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/npm-version.html" rel="bookmark"
+             title="Permalink to npm version">npm version</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-08-30T13:49:18+08:00">
+                Published: 四 30 八月 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <div class="highlight"><pre><span></span><code>版本示例：1.2.3 MAJOR.MINOR.PATCH:
+
+1.2.3
+┬ ┬ ┬
+│ │ │
+│ │ └ 补丁版本：bug修复，向后兼容
+│ └── 次要版本：新增功能，向后兼容
+└──── 主要版本：修改不向后兼容的api
+</code></pre></div>
+
+<!-- more -->
+
+<h5>示例</h5>
+<div class="highlight"><pre><span></span><code>  1.2.3
+ =1.2.3
+ &gt;1.2.3
+ &lt;1.2.3
+&gt;=1.2.3
+
+Note：1.2.3-rc1不在范围内
+</code></pre></div>
+
+<h5>版本范围</h5>
+<table>
+<thead>
+<tr>
+<th>声明</th>
+<th>结果</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~1.2.3</td>
+<td>is &gt;=1.2.3 &lt;1.3.0</td>
+<td></td>
+</tr>
+<tr>
+<td>^1.2.3</td>
+<td>is &gt;=1.2.3 &lt;2.0.0</td>
+<td></td>
+</tr>
+<tr>
+<td>^0.2.3</td>
+<td>is &gt;=0.2.3 &lt;0.3.0</td>
+<td>(0.x.x 不限定后两位版本)</td>
+</tr>
+<tr>
+<td>^0.0.1</td>
+<td>is =0.0.1</td>
+<td>(0.0.x不限定第三位版本)</td>
+</tr>
+<tr>
+<td>^1.2</td>
+<td>is &gt;=1.2.0 &lt;2.0.0</td>
+<td>(等同于\^1.2.0)</td>
+</tr>
+<tr>
+<td>~1.2</td>
+<td>is &gt;=1.2.0 &lt;1.3.0</td>
+<td>(等同于~1.2.0)</td>
+</tr>
+<tr>
+<td>^1</td>
+<td>is &gt;=1.0.0 &lt;2.0.0</td>
+<td></td>
+</tr>
+<tr>
+<td>~1</td>
+<td>same</td>
+<td></td>
+</tr>
+<tr>
+<td>1.x</td>
+<td>same</td>
+<td></td>
+</tr>
+<tr>
+<td>1.*</td>
+<td>same</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>same</td>
+<td></td>
+</tr>
+<tr>
+<td>*</td>
+<td>最新版本</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>same</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5>版本范围</h5>
+<div class="highlight"><pre><span></span><code><span class="mf">1.2.3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.3.0</span><span class="w">   </span><span class="n">为</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">1.2.3</span><span class="w"> </span><span class="o">&lt;=</span><span class="mf">2.3.4</span>
+<span class="mf">1.2.3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.3</span><span class="w">     </span><span class="n">为</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">1.2.3</span><span class="w"> </span><span class="o">&lt;</span><span class="mf">2.4.0</span>
+<span class="mf">1.2.3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2</span><span class="w">       </span><span class="n">为</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">1.2.3</span><span class="w"> </span><span class="o">&lt;</span><span class="mf">3.0.0</span>
+<span class="mf">1.2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.3.0</span><span class="w">     </span><span class="n">为</span><span class="w"> </span><span class="mf">1.2.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.3.0</span>
+
+<span class="n">横线右边</span><span class="w"> </span><span class="mf">2.3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.3.</span><span class="n">x</span>
+<span class="n">横线左边</span><span class="w"> </span><span class="mf">1.2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.2.0</span>
+</code></pre></div>
+
+<h5>条件版本范围</h5>
+<div class="highlight"><pre><span></span><code>&gt;=0.14 &lt;16  并且（空格分开）
+0.14.x || 15.x.x    或者（||分开）
+</code></pre></div>
+
+<h5>Pre-releases</h5>
+<p>1.2.3-prerelease+build</p>
+<h5>符号说明</h5>
+<div class="highlight"><pre><span></span><code>^   版本兼容
+~   版本接近
+0.x.x   最初版本
+1.x.x   公开的版本
+</code></pre></div>
+
+<h5>参考</h5>
+<p><a href="https://semver.org/">https://semver.org/</a></p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

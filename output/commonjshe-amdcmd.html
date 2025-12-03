@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>CommonJS和AMD/CMD</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="CommonJS根据JS的表现制定规范： {模块引用(require)} {模块定义(exports)} {模块标识(module)} NodeJS遵循了CommonJS规范，写法如下： // foo.js module.exports = function(x) {..." />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/commonjshe-amdcmd.html" rel="bookmark"
+             title="Permalink to CommonJS和AMD/CMD">CommonJS和AMD/CMD</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-08-29T17:06:25+08:00">
+                Published: 三 29 八月 2018
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->        <p>CommonJS根据JS的表现制定规范：</p>
+<blockquote>
+<p>{模块引用(require)} {模块定义(exports)} {模块标识(module)}</p>
+</blockquote>
+<p>NodeJS遵循了CommonJS规范，写法如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// foo.js</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">// index.js</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./foo&#39;</span><span class="p">)</span>
+<span class="nx">foo</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+</code></pre></div>
+
+<!-- more -->
+
+<p>CommonJS主要为了JS在后端制定的规范，但并不适用与前端，因为代码在是通过网络加载，所以AMD（异步模块定义）出现：</p>
+<blockquote>
+<p>define(['dep1','dep2'],function(dep1,dep2){...});</p>
+</blockquote>
+<p>RequireJS实现了AMD规范，写法如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// foo.js</span>
+
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">// index.js</span>
+
+<span class="nx">define</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span><span class="p">],</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">foo</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>CMD （通用模块定义）写法更加直观：</p>
+<blockquote>
+<p>// 所有模块都通过 define 来定义
+define(function(require, exports, module) {</p>
+<p>// 通过 require 引入依赖
+  var $ = require('jquery');
+  var Spinning = require('./spinning');</p>
+<p>// 通过 exports 对外提供接口
+  exports.doSomething = ...</p>
+<p>// 或者通过 module.exports 提供整个接口
+  module.exports = ...
+});</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">// foo.js</span>
+
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="w"> </span><span class="nx">exports</span><span class="p">,</span><span class="w"> </span><span class="nx">module</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">// index.js</span>
+
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="w"> </span><span class="nx">exports</span><span class="p">,</span><span class="w"> </span><span class="nx">module</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">foo</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>

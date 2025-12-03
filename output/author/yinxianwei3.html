@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>一枝红杏出墙来 - yinxianwei</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+        </head>
+
+        <body id="index" class="home">
+    <a href="https://github.com/yinxianwei">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+    </a>
+                <header id="banner" class="body">
+                        <h1><a href="/">一枝红杏出墙来</a></h1>
+                        <nav><ul>
+                                                <li><a href="/category/sui-bi.html">随笔</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+
+                    <section id="content" class="body">
+                        <ol id="posts-list" class="hfeed" start="9">
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/jszhong-tofixedde-keng.html" rel="bookmark"
+                               title="Permalink to JS中toFixed的坑">JS中toFixed的坑</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-07-20T14:01:48+08:00">
+                Published: 一 20 七月 2020
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>重点：toFixed不是四舍五入</p>
+<p>MDN: </p>
+<blockquote>
+<p>toFixed() 方法使用定点表示法来格式化一个数。</p>
+</blockquote>
+<p>Chrome：</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="mf">0.005</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">0.01</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="mf">0.015</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">0.01</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="mf">0.025</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">0.03</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="mf">0.035 …</span></code></pre></div>
+                        <a class="readmore" href="/jszhong-tofixedde-keng.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/guan-yu-htmlde-langshu-xing.html" rel="bookmark"
+                               title="Permalink to 关于html的lang属性">关于html的lang属性</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-06-04T14:12:46+08:00">
+                Published: 四 04 六月 2020
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>MDN:</p>
+<blockquote>
+<p>lang 全局属性 参与了元素语言的定义。这个语言是不可编辑元素写入的语言，或者可编辑元素应该写入的语言。标签包含 …</p></blockquote>
+                        <a class="readmore" href="/guan-yu-htmlde-langshu-xing.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/macmo-ren-shu-ru-fa-ji-xiu-gai-zhong-ying-wen-qie-huan-an-jian.html" rel="bookmark"
+                               title="Permalink to Mac默认输入法及修改中英文切换按键">Mac默认输入法及修改中英文切换按键</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-12T15:59:51+08:00">
+                Published: 二 12 五月 2020
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <ol>
+<li>删除默认英文输入法<ol>
+<li>关闭SIP</li>
+<li>打开<code>~/Library/Preferences/com.apple.HIToolbox.plist</code>文件,删除ABC相关内容后重启
+ <img alt="-w800" src="media/15706071952409/15706076184375.jpg"></li>
+</ol>
+</li>
+<li>修改中文输入入法为shift切换中英文<ol>
+<li>使用<a href="https://github.com/Eronana/scimex">https://github.com/Eronana/scimex</a>插件修改(需重启)</li>
+<li>可 …</li></ol></li></ol>
+                        <a class="readmore" href="/macmo-ren-shu-ru-fa-ji-xiu-gai-zhong-ying-wen-qie-huan-an-jian.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/ubuntu-14045-an-zhuang-mysql-57.html" rel="bookmark"
+                               title="Permalink to Ubuntu 14.04.5 安装 MySQL 5.7">Ubuntu 14.04.5 安装 MySQL 5.7</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-07T13:46:19+08:00">
+                Published: 四 07 五月 2020
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <h3>安装</h3>
+<p>下载地址：<a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a>
+- <code>wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-server_5.7.21-1ubuntu14.04_amd64.deb-bundle.tar</code>  </p>
+<!-- more -->
+
+<ul>
+<li><code>tar -xf mysql-server_5.7.21-1ubuntu14.04_amd64.deb-bundle.tar</code></li>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt-get upgrade</code></li>
+<li><code>apt-get install libaio1</code></li>
+<li><code>sudo dpkg -i mysql-common_5.7.21-1ubuntu14.04_amd64 …</code></li></ul>
+                        <a class="readmore" href="/ubuntu-14045-an-zhuang-mysql-57.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/tokyo60-v3-kit-dfu.html" rel="bookmark"
+                               title="Permalink to TOKYO60 V3 KIT DFU">TOKYO60 V3 KIT DFU</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-01T21:58:53+08:00">
+                Published: 五 01 五月 2020
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>L_SHIFT+R_SHIFT+B</p>
+                        <a class="readmore" href="/tokyo60-v3-kit-dfu.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/qian-duan-de-bu-ke-jian-zi-fu.html" rel="bookmark"
+                               title="Permalink to 前端的不可见字符">前端的不可见字符</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-01-20T17:37:49+08:00">
+                Published: 一 20 一月 2020
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>https://stackoverflow.com/questions/11598786/how-to-replace-non-printable-unicode-characters-javascript</p>
+<blockquote>
+<p>most of which are quite printable</p>
+</blockquote>
+<p>https://blog.csdn.net/ranjio_z/article/details/51993040?utm_source=blogxgwz8</p>
+<p>http://www.unicode.org/charts/PDF/U2000.pdf</p>
+<!-- more -->
+
+<table>
+<thead>
+<tr>
+<th>unicode</th>
+<th>显示符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\u2000</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2001</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2002</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2003</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2004</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2005</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2006</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2007</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2008</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u2009</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u200a</td>
+<td> </td>
+</tr>
+<tr>
+<td>\u200b</td>
+<td>​</td>
+</tr>
+<tr>
+<td>\u200c</td>
+<td>‌</td>
+</tr>
+<tr>
+<td>\u200d</td>
+<td>‍</td>
+</tr>
+<tr>
+<td>\u200e …</td></tr></tbody></table>
+                        <a class="readmore" href="/qian-duan-de-bu-ke-jian-zi-fu.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/bian-xie-phonegapioscha-jian-yi.html" rel="bookmark"
+                               title="Permalink to 编写PhoneGapiOS插件一">编写PhoneGapiOS插件一</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-04T14:27:55+08:00">
+                Published: 三 04 九月 2019
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <h1>PhoneGap安装</h1>
+<p>当前版本是<code>PhoneGap2.9.1</code>、<code>Xcode6.3</code></p>
+<ol>
+<li>
+<p>下载PhoneGap</p>
+<p><a href="https://phonegap.com/install/">官网地址</a>，NodeJS命令安装老是失败，我是直接下载的zip包解压的。
+<img alt="QQ20150421-2@2x" src="media/15027829717905/QQ20150421-2@2x.png"></p>
+</li>
+</ol>
+<!-- more -->
+
+<ol>
+<li>
+<p>解压</p>
+<p>解压之后的目录是这样的：
+<img alt="QQ20150421-3@2x" src="media/15027829717905/QQ20150421-3@2x.png"></p>
+</li>
+</ol>
+<!--more-->
+<h1>iOS的工程创建</h1>
+<ol>
+<li>
+<p>创建工程（终端命令）</p>
+<ul>
+<li>首 …</li></ul></li></ol>
+                        <a class="readmore" href="/bian-xie-phonegapioscha-jian-yi.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/bian-xie-phonegapioscha-jian-er.html" rel="bookmark"
+                               title="Permalink to 编写PhoneGapiOS插件二">编写PhoneGapiOS插件二</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-04T14:27:44+08:00">
+                Published: 三 04 九月 2019
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <blockquote>
+<p>由于要写关于蓝牙的插件，所以方法名里会包含蓝牙关键字，不要奇怪。</p>
+</blockquote>
+<h1>打开工程</h1>
+<ul>
+<li>打开工程如下：
+    <img alt="QQ20150421-5@2x" src="media/15027829584942/QQ20150421-5@2x.png"></li>
+</ul>
+<!-- more -->
+
+<h1>新建Scheme</h1>
+<!--more-->
+<p>打开并没有办法直 …</p>
+                        <a class="readmore" href="/bian-xie-phonegapioscha-jian-er.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/bian-xie-phonegapioscha-jian-san.html" rel="bookmark"
+                               title="Permalink to 编写PhoneGapiOS插件三">编写PhoneGapiOS插件三</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-04T14:27:36+08:00">
+                Published: 三 04 九月 2019
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p><code>update: 2015-04-28</code></p>
+<p>标准插件形式Demo地址：<a href="https://github.com/yinxianwei/cordova-plugin-test">cordova-plugin-test</a></p>
+<blockquote>
+<p>主要是JS的回调，附Demo地址。</p>
+</blockquote>
+<!-- more -->
+
+<h1>编写插件方法</h1>
+<ul>
+<li>
+<p>html里面调用已经写过了，只是没有对数据进行处理，<code>CDVInvokedUrlCommand</code>这个类里有两个重要的参数。</p>
+<ul>
+<li>
+<p><code>arguments</code></p>
+<p>用于 …</p></li></ul></li></ul>
+                        <a class="readmore" href="/bian-xie-phonegapioscha-jian-san.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="/new-dateyyyy-mm-dd-hhmmsszai-safarizhong-de-wen-ti.html" rel="bookmark"
+                               title="Permalink to new Date('yyyy-MM-dd hh:mm:ss')在Safari中的问题">new Date('yyyy-MM-dd hh:mm:ss')在Safari中的问题</a></h1>
+                    </header>
+
+                    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-04T14:18:19+08:00">
+                Published: 三 04 九月 2019
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/yinxianwei.html">yinxianwei</a>
+                </address>
+        <p>In <a href="/category/sui-bi.html">随笔</a>.</p>
+        
+</footer><!-- /.post-info -->                        <p>如：<code>new Date('2019-09-04 09:00:41')</code> 得到的是 <code>Invalid Date</code></p>
+<p>使用 <code>new Date('2019/09/04 09:00:41')</code> 是正常的</p>
+<p>MDN: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse#Date_Time_String_Format">a simplification of the ISO 8601 calendar date extended format</a></p>
+<blockquote>
+<p>The standard string representation of a date time string is a simplification …</p></blockquote>
+                        <a class="readmore" href="/new-dateyyyy-mm-dd-hhmmsszai-safarizhong-de-wen-ti.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+                    </ol><!-- /#posts-list -->
+  <nav>
+    <ul>
+        <li><a href="/author/yinxianwei.html">&Lang;</a></li>
+        <li><a href="/author/yinxianwei2.html">&lang;</a></li>
+      <li>Page 3 / 6</li>
+        <li><a href="/author/yinxianwei4.html">&rang;</a></li>
+        <li><a href="/author/yinxianwei6.html">&Rang;</a></li>
+    </ul>
+  </nav>
+                    </section><!-- /#content -->
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+    
+    <script>
+        var link = document.createElement('a')
+        link.style.marginRight = "10px"
+        link.href = "https://beian.miit.gov.cn"
+        link.target = "_blank"
+        link.textContent = "豫ICP备16018939号-2"
+        document.querySelector('#contentinfo > p').prepend(link)
+    </script>
+
+        </body>
+</html>
